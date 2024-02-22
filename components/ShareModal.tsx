@@ -1,10 +1,10 @@
 import Modal from './Modal'
 
-const InfoModal = () => {
+const ShareModal = () => {
   return (
-    <Modal modalKey='infoModalOpen' closeActionType='SET_INFO_MODAL'>
+    <Modal modalKey='shareModalOpen' closeActionType='SET_SHARE_MODAL'>
       <h1 className='font-semibold text-xl mb-2'>
-        What is this app and why do I need it?
+        Share this state of the app!
       </h1>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum deserunt
@@ -23,4 +23,4 @@ const InfoModal = () => {
   )
 }
 
-export default InfoModal
+export default ShareModal

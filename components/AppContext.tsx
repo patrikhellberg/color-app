@@ -3,10 +3,15 @@ import { Dispatch, PropsWithChildren, createContext, useReducer } from 'react'
 type AppState = {
   toolbarOpen: boolean
   infoModalOpen: boolean
+  shareModalOpen: boolean
   selectedColor: string
 }
 
-type ReducerType = 'SET_COLOR' | 'SET_TOOLBAR' | 'SET_INFO_MODAL'
+export type ReducerType =
+  | 'SET_COLOR'
+  | 'SET_TOOLBAR'
+  | 'SET_INFO_MODAL'
+  | 'SET_SHARE_MODAL'
 
 type ReducerAction = {
   type: ReducerType
@@ -16,6 +21,7 @@ type ReducerAction = {
 const initialState: AppState = {
   toolbarOpen: false,
   infoModalOpen: false,
+  shareModalOpen: false,
   selectedColor: '#000000',
 }
 
@@ -30,6 +36,11 @@ const reducer = (state: AppState, { type, data }: ReducerAction): AppState => {
       return {
         ...state,
         infoModalOpen: data,
+      }
+    case 'SET_SHARE_MODAL':
+      return {
+        ...state,
+        shareModalOpen: data,
       }
     case 'SET_COLOR':
       return {
