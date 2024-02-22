@@ -7,7 +7,7 @@ type Props = {
 const OverlayContainer = ({ children, active }: PropsWithChildren<Props>) => {
   return (
     <div
-      className={`absolute inset-0 w-screen h-screen grid place-content-center z-20 backdrop-blur-sm transition-all
+      className={`fixed inset-0 w-screen h-screen grid place-content-center z-20 backdrop-blur-sm transition-all
     ${
       active
         ? 'opacity-100 pointer-events-auto'
