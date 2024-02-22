@@ -1,39 +1,51 @@
 'use client'
 
 import SVG, { Export, GearSix, Info } from '@bm-js/icons'
-import { useContext } from 'react'
+import { useContext, useMemo } from 'react'
 import { AppContext } from './AppContext'
+import { getForegroundColor } from '@/utils/colors'
 
 const ToolbarIcon = () => {
-  const { dispatch } = useContext(AppContext)
+  const {
+    dispatch,
+    state: { selectedColor },
+  } = useContext(AppContext)
 
-  const openToolbar = () => dispatch({ type: 'SET_TOOLBAR', data: true })
-  const openInfoModal = () => dispatch({ type: 'SET_INFO_MODAL', data: true })
-  const openShareModal = () => dispatch({ type: 'SET_SHARE_MODAL', data: true })
+  const icons = [
+    {
+      action: () => dispatch({ type: 'SET_SHARE_MODAL', data: true }),
+      id: 'open_shareModalOpen',
+      icon: Export,
+    },
+    {
+      action: () => dispatch({ type: 'SET_INFO_MODAL', data: true }),
+      id: 'open_infoModalOpen',
+      icon: Info,
+    },
+    {
+      action: () => dispatch({ type: 'SET_TOOLBAR', data: true }),
+      id: 'open_toolbar',
+      icon: GearSix,
+    },
+  ]
+
+  const foregroundColor = useMemo(
+    () => getForegroundColor(selectedColor),
+    [selectedColor]
+  )
 
   return (
     <div className='absolute top-4 right-4 flex gap-4'>
-      <button onClick={openShareModal} id={'open_shareModalOpen'}>
-        <SVG
-          icon={Export}
-          className='cursor-pointer'
-          pathClassName='pointer-events-none'
-        />
-      </button>
-      <button onClick={openInfoModal} id={'open_infoModalOpen'}>
-        <SVG
-          icon={Info}
-          className='cursor-pointer'
-          pathClassName='pointer-events-none'
-        />
-      </button>
-      <button onClick={openToolbar} id={'open_toolbar'}>
-        <SVG
-          icon={GearSix}
-          className='cursor-pointer'
-          pathClassName='pointer-events-none'
-        />
-      </button>
+      {icons.map((icon) => (
+        <button onClick={icon.action} id={icon.id} key={icon.id}>
+          <SVG
+            stroke={foregroundColor}
+            icon={icon.icon}
+            className='cursor-pointer'
+            pathClassName='pointer-events-none'
+          />
+        </button>
+      ))}
     </div>
   )
 }

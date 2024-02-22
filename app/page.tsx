@@ -1,3 +1,4 @@
+import ColorDisplay from '@/components/ColorDisplay'
 import InfoModal from '@/components/InfoModal'
 import PageWrapper from '@/components/PageWrapper'
 import ShareModal from '@/components/ShareModal'
@@ -11,7 +12,7 @@ const Page = () => {
       <ToolbarIcons />
       <InfoModal />
       <ShareModal />
-      <p>My page</p>
+      <ColorDisplay />
     </PageWrapper>
   )
 }

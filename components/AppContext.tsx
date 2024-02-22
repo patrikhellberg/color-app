@@ -22,7 +22,7 @@ const initialState: AppState = {
   toolbarOpen: false,
   infoModalOpen: false,
   shareModalOpen: false,
-  selectedColor: '#000000',
+  selectedColor: '#333333',
 }
 
 const reducer = (state: AppState, { type, data }: ReducerAction): AppState => {
