@@ -2,27 +2,39 @@ import { Dispatch, PropsWithChildren, createContext, useReducer } from 'react'
 
 type AppState = {
   toolbarOpen: boolean
+  infoModalOpen: boolean
   selectedColor: string
 }
 
-type ReducerType = 'SET_COLOR' | 'TOGGLE_TOOLBAR'
+type ReducerType = 'SET_COLOR' | 'SET_TOOLBAR' | 'SET_INFO_MODAL'
 
 type ReducerAction = {
   type: ReducerType
-  data?: any
+  data: any
 }
 
 const initialState: AppState = {
   toolbarOpen: false,
+  infoModalOpen: false,
   selectedColor: '#000000',
 }
 
-const reducer = (state: AppState, action: ReducerAction): AppState => {
-  switch (action.type) {
-    case 'TOGGLE_TOOLBAR':
+const reducer = (state: AppState, { type, data }: ReducerAction): AppState => {
+  switch (type) {
+    case 'SET_TOOLBAR':
       return {
         ...state,
-        toolbarOpen: !state.toolbarOpen,
+        toolbarOpen: data,
+      }
+    case 'SET_INFO_MODAL':
+      return {
+        ...state,
+        infoModalOpen: data,
+      }
+    case 'SET_COLOR':
+      return {
+        ...state,
+        selectedColor: data,
       }
     default:
       return state

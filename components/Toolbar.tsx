@@ -10,7 +10,7 @@ const Toolbar = () => {
     dispatch,
   } = useContext(AppContext)
 
-  const toggleToolbar = () => dispatch({ type: 'TOGGLE_TOOLBAR' })
+  const closeToolbar = () => dispatch({ type: 'SET_TOOLBAR', data: false })
 
   return (
     <div
@@ -18,7 +18,7 @@ const Toolbar = () => {
     ${!toolbarOpen && '-translate-y-32'}
     `}
     >
-      <button className='absolute top-4 right-4' onClick={toggleToolbar}>
+      <button className='absolute top-4 right-4' onClick={closeToolbar}>
         <SVG icon={X} pathClassName='stroke-white' width={20} />
       </button>
       Toolbar
