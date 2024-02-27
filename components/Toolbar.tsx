@@ -2,7 +2,7 @@
 
 import { useContext, useRef } from 'react'
 import { AppContext } from './AppContext'
-import SVG, { X } from '@bm-js/icons'
+import SVG, { X } from '@hellberg/react-svg-icons'
 import { useClickOutside } from '@/utils/hooks'
 import ColorInput from './ColorInput'
 import ColorPresets from './ColorPresets'

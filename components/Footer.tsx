@@ -1,4 +1,4 @@
-import SVG, { GitBranch, GithubLogo } from '@bm-js/icons'
+import SVG, { GitBranch, GithubLogo } from '@hellberg/react-svg-icons'
 
 const Footer = () => {
   const githubLink = 'https://github.com/patrikhellberg'

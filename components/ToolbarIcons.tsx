@@ -1,6 +1,6 @@
 'use client'
 
-import SVG, { Export, GearSix, Info } from '@bm-js/icons'
+import SVG, { Export, GearSix, Info } from '@hellberg/react-svg-icons'
 import { useContext } from 'react'
 import { AppContext } from './AppContext'
 
