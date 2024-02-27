@@ -1,10 +1,13 @@
 import { getForegroundColor } from '@/utils/colors'
+import { useRouter, useSearchParams } from 'next/navigation'
 import {
   Dispatch,
   PropsWithChildren,
   createContext,
+  useEffect,
   useMemo,
   useReducer,
+  useState,
 } from 'react'
 
 type AppState = {
@@ -23,6 +26,7 @@ export type ReducerType =
   | 'SET_TOOLBAR'
   | 'SET_INFO_MODAL'
   | 'SET_SHARE_MODAL'
+  | 'SET_FROM_QUERY'
 
 type ReducerAction = {
   type: ReducerType
@@ -39,6 +43,8 @@ const initialState: AppState = {
 const initialComputed: Computed = {
   foreground: '#FFFFFF',
 }
+
+const queryKeys: (keyof AppState)[] = ['selectedColor']
 
 const reducer = (state: AppState, { type, data }: ReducerAction): AppState => {
   switch (type) {
@@ -62,6 +68,11 @@ const reducer = (state: AppState, { type, data }: ReducerAction): AppState => {
         ...state,
         selectedColor: data,
       }
+    case 'SET_FROM_QUERY':
+      return {
+        ...state,
+        ...data,
+      }
     default:
       return state
   }
@@ -78,11 +89,32 @@ export const AppContext = createContext<{
 })
 
 const Context = ({ children }: PropsWithChildren) => {
+  const [isInitialized, setIsInitialized] = useState(false)
   const [state, dispatch] = useReducer(reducer, initialState)
+  const searchParams = useSearchParams()
+  const router = useRouter()
 
   const foreground = useMemo(() => {
     return getForegroundColor(state.selectedColor)
   }, [state.selectedColor])
+
+  useEffect(() => {
+    if (!isInitialized) {
+      const queryState: { [key: string]: string } = {}
+      searchParams.forEach((value, key) => {
+        queryState[key] = value
+      })
+      dispatch({ type: 'SET_FROM_QUERY', data: queryState })
+      setIsInitialized(true)
+    } else {
+      const query = queryKeys.reduce((acc, key, i) => {
+        acc += `${key}=${encodeURIComponent(state[key] as string)}`
+        if (i !== queryKeys.length - 1) acc += '&'
+        return acc
+      }, '?')
+      router.push(`${query}`)
+    }
+  }, [state, isInitialized, searchParams])
 
   return (
     <AppContext.Provider value={{ state, computed: { foreground }, dispatch }}>
