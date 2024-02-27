@@ -1,12 +1,11 @@
 'use client'
 
 import { PropsWithChildren, useContext, useMemo, useRef } from 'react'
-import { AppContext, ReducerType } from './AppContext'
+import { AppContext } from './AppContext'
+import type { ReducerType, ModalKey } from '@/types'
 import OverlayContainer from './OverlayContainer'
 import SVG, { X } from '@hellberg/react-svg-icons'
 import { useClickOutside } from '@/utils/hooks'
-
-type ModalKey = 'infoModalOpen' | 'shareModalOpen'
 
 type Props = {
   modalKey: ModalKey

@@ -1,5 +1,6 @@
 import { ChangeEventHandler, useContext } from 'react'
-import { AppContext, AppState, ReducerType } from './AppContext'
+import { AppContext } from './AppContext'
+import type { ReducerType, AppState } from '@/types'
 
 type Props = {
   stateKey: keyof AppState

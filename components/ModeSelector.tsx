@@ -1,5 +1,6 @@
 import { useContext } from 'react'
-import { AppContext, Mode } from './AppContext'
+import { AppContext } from './AppContext'
+import type { Mode } from '@/types'
 
 const ModeSelector = () => {
   const {

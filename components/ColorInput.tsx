@@ -1,7 +1,8 @@
 'use client'
 
 import { ChangeEventHandler, useContext, useRef, useState } from 'react'
-import { AppContext, AppState, ReducerType } from './AppContext'
+import { AppContext } from './AppContext'
+import type { AppState, ReducerType } from '@/types'
 import SVG, { Palette } from '@hellberg/react-svg-icons'
 import ColorPresets from './ColorPresets'
 

@@ -1,5 +1,6 @@
 import { useContext } from 'react'
-import { AppContext, AppState, ReducerType } from './AppContext'
+import { AppContext } from './AppContext'
+import type { AppState, ReducerType } from '@/types'
 import { colorPresets, getForegroundColor } from '@/utils/colors'
 
 type Props = {
