@@ -4,20 +4,34 @@ const InfoModal = () => {
   return (
     <Modal modalKey='infoModalOpen' closeActionType='SET_INFO_MODAL'>
       <h1 className='font-semibold text-xl mb-2'>
-        What is this app and why do I need it?
+        What is this app, why do I need it, and how do I use it?
       </h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum deserunt
-        quae magnam minus nulla vel doloremque dolorem eos distinctio
-        reprehenderit? Quaerat nesciunt, culpa doloribus fugit eaque blanditiis
-        deleniti aliquam neque. Nostrum ad velit mollitia veniam eos optio esse
-        veritatis nemo praesentium qui sapiente sed, neque atque perspiciatis
-        ipsum animi nihil vero sequi! Vitae numquam blanditiis quasi fugit
-        nesciunt quam nam, in incidunt tenetur inventore qui esse eaque
-        voluptatem officia, est doloremque ipsa reiciendis enim illum minima
-        harum corrupti fuga animi? Quos ullam magnam accusantium dolor tenetur
-        dolore cum quod? Explicabo, quam voluptatibus minima officiis eveniet
-        autem non deserunt ipsa id?
+      <p className='mb-2'>
+        The purpose of this website is to be able to use your screen as a mood
+        light. <br />
+        Many people keep a screen, TV or laptop at home. Why not be able to use
+        all of that screen real estate to light up your home?
+      </p>
+      <p className='mb-2'>
+        Click the gear icon on the top right to get started.
+      </p>
+      <p className='mb-2'>First select a mode:</p>
+      <ul className=' list-disc pl-4 mb-2'>
+        <li>
+          <strong>Color</strong> lets you pick a single color to set your screen
+          to
+        </li>
+        <li>
+          <strong>Gradient</strong> lets you pick a two colors to set as a
+          gradient
+        </li>
+        <li>
+          <strong>Fade</strong> lets you pick a two colors between which the
+          screen will fade
+        </li>
+      </ul>
+      <p className='mb-2'>
+        Other options will appear depending on which mode you select.
       </p>
     </Modal>
   )
