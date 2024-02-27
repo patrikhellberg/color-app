@@ -1,7 +1,9 @@
 'use client'
 
-import { ChangeEventHandler, useContext, useRef } from 'react'
+import { ChangeEventHandler, useContext, useRef, useState } from 'react'
 import { AppContext, AppState, ReducerType } from './AppContext'
+import SVG, { Palette } from '@hellberg/react-svg-icons'
+import ColorPresets from './ColorPresets'
 
 type Props = {
   reducerType: ReducerType
@@ -11,6 +13,7 @@ type Props = {
 
 const ColorInput = ({ reducerType, label, colorKey }: Props) => {
   const { state, dispatch } = useContext(AppContext)
+  const [presetsOpen, setPresetsOpen] = useState(false)
 
   const inputRef = useRef<HTMLInputElement | null>(null)
 
@@ -25,7 +28,17 @@ const ColorInput = ({ reducerType, label, colorKey }: Props) => {
 
   return (
     <div>
-      <p>{label}</p>
+      <div className='flex justify-between mb-2'>
+        <p>{label}</p>
+        <button onClick={() => setPresetsOpen(!presetsOpen)} className='pr-1'>
+          <SVG
+            className='pointer-events-none'
+            icon={Palette}
+            pathClassName='stroke-slate-300'
+            width={20}
+          />
+        </button>
+      </div>
       <input
         ref={inputRef}
         type='color'
@@ -39,7 +52,10 @@ const ColorInput = ({ reducerType, label, colorKey }: Props) => {
         style={{
           background: state[colorKey] as string,
         }}
-      ></button>
+      />
+      {presetsOpen && (
+        <ColorPresets reducerType={reducerType} stateKey={colorKey} />
+      )}
     </div>
   )
 }

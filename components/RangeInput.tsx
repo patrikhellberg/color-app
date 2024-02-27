@@ -27,7 +27,7 @@ const RangeInput = ({
 
   return (
     <div>
-      <p>{label}</p>
+      <p className='mb-2'>{label}</p>
       <input
         className='w-40 accent-slate-400 h-5'
         type='range'

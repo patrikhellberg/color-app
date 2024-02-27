@@ -17,7 +17,7 @@ const ModeSelector = () => {
 
   return (
     <div className='flex flex-col items-start'>
-      <p>Select mode</p>
+      <p className='mb-2'>Select mode</p>
       <div className='flex bg-slate-700 rounded-md border border-solid border-slate-400 p-1'>
         {(Object.keys(modes) as Mode[]).map((key) => (
           <button
