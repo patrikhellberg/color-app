@@ -17,10 +17,10 @@ const initialState: AppState = {
   toolbarOpen: false,
   infoModalOpen: false,
   shareModalOpen: false,
-  primaryColor: '#333333',
-  secondaryColor: '#FFFFFF',
-  mode: 'single',
-  gradientDirection: 0,
+  primaryColor: '#284de2',
+  secondaryColor: '#df46e2',
+  mode: 'gradient',
+  gradientDirection: 45,
   fadeTime: 5,
 }
 
