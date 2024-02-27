@@ -1,10 +1,21 @@
-import { Dispatch, PropsWithChildren, createContext, useReducer } from 'react'
+import { getForegroundColor } from '@/utils/colors'
+import {
+  Dispatch,
+  PropsWithChildren,
+  createContext,
+  useMemo,
+  useReducer,
+} from 'react'
 
 type AppState = {
   toolbarOpen: boolean
   infoModalOpen: boolean
   shareModalOpen: boolean
   selectedColor: string
+}
+
+type Computed = {
+  foreground: string
 }
 
 export type ReducerType =
@@ -23,6 +34,10 @@ const initialState: AppState = {
   infoModalOpen: false,
   shareModalOpen: false,
   selectedColor: '#333333',
+}
+
+const initialComputed: Computed = {
+  foreground: '#FFFFFF',
 }
 
 const reducer = (state: AppState, { type, data }: ReducerAction): AppState => {
@@ -55,16 +70,22 @@ const reducer = (state: AppState, { type, data }: ReducerAction): AppState => {
 export const AppContext = createContext<{
   state: AppState
   dispatch: Dispatch<ReducerAction>
+  computed: Computed
 }>({
   state: initialState,
   dispatch: () => {},
+  computed: initialComputed,
 })
 
 const Context = ({ children }: PropsWithChildren) => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
+  const foreground = useMemo(() => {
+    return getForegroundColor(state.selectedColor)
+  }, [state.selectedColor])
+
   return (
-    <AppContext.Provider value={{ state, dispatch }}>
+    <AppContext.Provider value={{ state, computed: { foreground }, dispatch }}>
       {children}
     </AppContext.Provider>
   )

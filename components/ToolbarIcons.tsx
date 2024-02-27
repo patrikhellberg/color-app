@@ -1,14 +1,13 @@
 'use client'
 
 import SVG, { Export, GearSix, Info } from '@bm-js/icons'
-import { useContext, useMemo } from 'react'
+import { useContext } from 'react'
 import { AppContext } from './AppContext'
-import { getForegroundColor } from '@/utils/colors'
 
 const ToolbarIcon = () => {
   const {
     dispatch,
-    state: { selectedColor },
+    computed: { foreground },
   } = useContext(AppContext)
 
   const icons = [
@@ -29,17 +28,12 @@ const ToolbarIcon = () => {
     },
   ]
 
-  const foregroundColor = useMemo(
-    () => getForegroundColor(selectedColor),
-    [selectedColor]
-  )
-
   return (
     <div className='absolute top-4 right-4 flex gap-4'>
       {icons.map((icon) => (
         <button onClick={icon.action} id={icon.id} key={icon.id}>
           <SVG
-            stroke={foregroundColor}
+            stroke={foreground}
             icon={icon.icon}
             className='cursor-pointer'
             pathClassName='pointer-events-none'
