@@ -114,7 +114,7 @@ const Context = ({ children }: PropsWithChildren) => {
       }, '?')
       router.push(`${query}`)
     }
-  }, [state, isInitialized, searchParams])
+  }, [state, isInitialized, searchParams, router])
 
   return (
     <AppContext.Provider value={{ state, computed: { foreground }, dispatch }}>

@@ -1,10 +1,14 @@
 'use client'
 
-import { PropsWithChildren } from 'react'
+import { PropsWithChildren, Suspense } from 'react'
 import Context from './AppContext'
 
 const PageWrapper = ({ children }: PropsWithChildren) => {
-  return <Context>{children}</Context>
+  return (
+    <Suspense>
+      <Context>{children}</Context>
+    </Suspense>
+  )
 }
 
 export default PageWrapper
