@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@hellberg/react-svg-icons": "^1.1.7",
+    "@types/qrcode": "^1.5.5",
     "next": "14.1.0",
+    "qrcode": "^1.5.3",
     "react": "^18",
     "react-dom": "^18"
   },
