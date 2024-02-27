@@ -4,7 +4,6 @@ import { AppContext, Mode } from './AppContext'
 const ModeSelector = () => {
   const {
     state: { mode },
-    computed: { foreground },
     dispatch,
   } = useContext(AppContext)
 
@@ -19,18 +18,13 @@ const ModeSelector = () => {
   return (
     <div className='flex flex-col items-start'>
       <p>Select mode</p>
-      <div
-        className='flex bg-white rounded-md border border-solid p-1'
-        style={{
-          borderColor: foreground,
-        }}
-      >
+      <div className='flex bg-slate-700 rounded-md border border-solid border-slate-400 p-1'>
         {(Object.keys(modes) as Mode[]).map((key) => (
           <button
             onClick={() => setMode(key)}
             key={`mode_${key}`}
-            className={`px-4 py-1 rounded transition-colors text-black ${
-              key === mode ? 'bg-slate-300' : ''
+            className={`px-4 py-1 rounded transition-colors text-slate-300 ${
+              key === mode ? 'bg-slate-900' : ''
             }`}
           >
             {modes[key]}

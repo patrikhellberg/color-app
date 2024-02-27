@@ -147,7 +147,9 @@ const Context = ({ children }: PropsWithChildren) => {
       searchParams.forEach((value, key) => {
         queryState[key] = value
       })
-      dispatch({ type: 'SET_FROM_QUERY', data: queryState })
+      if (Object.keys(queryState).length) {
+        dispatch({ type: 'SET_FROM_QUERY', data: queryState })
+      } else dispatch({ type: 'SET_TOOLBAR', data: true })
       setIsInitialized(true)
     } else {
       const query = queryKeys.reduce((acc, key, i) => {

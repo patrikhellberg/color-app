@@ -10,8 +10,7 @@ import RangeInput from './RangeInput'
 
 const Toolbar = () => {
   const {
-    state: { toolbarOpen, primaryColor, mode },
-    computed: { foreground },
+    state: { toolbarOpen, mode },
     dispatch,
   } = useContext(AppContext)
 
@@ -21,18 +20,13 @@ const Toolbar = () => {
 
   return (
     <div
-      style={{
-        background: primaryColor,
-        color: foreground,
-        borderColor: foreground,
-      }}
       ref={ref}
-      className={`absolute right-0 left-0 top-0 z-10 px-4 py-4  shadow-lg transition-all border-b border-solid border-black
+      className={`absolute right-0 left-0 top-0 z-10 px-4 py-4  shadow-lg transition-all border-b border-solid border-black bg-slate-900 text-slate-300
     ${!toolbarOpen && '-translate-y-full'}
     `}
     >
       <button className='absolute top-4 right-4' onClick={closeToolbar}>
-        <SVG icon={X} stroke={foreground} width={20} />
+        <SVG icon={X} pathClassName='stroke-slate-300' width={20} />
       </button>
       <div className='flex gap-4'>
         <ModeSelector />

@@ -4,7 +4,7 @@ import SVG, { Export, GearSix, Info } from '@hellberg/react-svg-icons'
 import { useContext } from 'react'
 import { AppContext } from './AppContext'
 
-const ToolbarIcon = () => {
+const ToolbarIcons = () => {
   const {
     dispatch,
     computed: { foreground },
@@ -44,4 +44,4 @@ const ToolbarIcon = () => {
   )
 }
 
-export default ToolbarIcon
+export default ToolbarIcons

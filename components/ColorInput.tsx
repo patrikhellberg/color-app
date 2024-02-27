@@ -10,11 +10,7 @@ type Props = {
 }
 
 const ColorInput = ({ reducerType, label, colorKey }: Props) => {
-  const {
-    state,
-    computed: { foreground },
-    dispatch,
-  } = useContext(AppContext)
+  const { state, dispatch } = useContext(AppContext)
 
   const inputRef = useRef<HTMLInputElement | null>(null)
 
@@ -39,10 +35,9 @@ const ColorInput = ({ reducerType, label, colorKey }: Props) => {
       />
       <button
         onClick={openColorInput}
-        className='border border-solid h-[41px] rounded-md w-64'
+        className='border border-solid h-[41px] rounded-md w-64 border-slate-400'
         style={{
           background: state[colorKey] as string,
-          borderColor: foreground,
         }}
       ></button>
     </div>
