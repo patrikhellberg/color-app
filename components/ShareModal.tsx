@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Modal from './Modal'
+import SVG, { Checks, Copy, CopySimple } from '@hellberg/react-svg-icons'
 
 const ShareModal = () => {
   const [hasCopied, setHasCopied] = useState(false)
@@ -23,10 +24,16 @@ const ShareModal = () => {
       </p>
       <div>
         <button
-          className='py-2 px-4 border border-solid border-slate-800 rounded hover:bg-slate-800 hover:text-slate-200 transition-colors'
+          className='py-2 px-4 border border-solid border-slate-800 rounded hover:bg-slate-800 hover:text-slate-200 transition-colors flex items-center gap-2 group'
           onClick={copyLink}
         >
           {hasCopied ? 'Link copied!' : 'Copy link'}
+          <SVG
+            icon={hasCopied ? Checks : CopySimple}
+            width={20}
+            className='pointer-events-none'
+            pathClassName='group-hover:stroke-slate-200 stroke-black'
+          />
         </button>
       </div>
     </Modal>
