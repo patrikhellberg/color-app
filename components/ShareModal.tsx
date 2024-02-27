@@ -1,24 +1,34 @@
+'use client'
+
+import { useState } from 'react'
 import Modal from './Modal'
 
 const ShareModal = () => {
+  const [hasCopied, setHasCopied] = useState(false)
+
+  const copyLink = () => {
+    navigator.clipboard.writeText(location.href)
+    setHasCopied(true)
+    setTimeout(() => setHasCopied(false), 1000)
+  }
+
   return (
     <Modal modalKey='shareModalOpen' closeActionType='SET_SHARE_MODAL'>
       <h1 className='font-semibold text-xl mb-2'>
-        Share this state of the app!
+        Share a link to this color setting
       </h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum deserunt
-        quae magnam minus nulla vel doloremque dolorem eos distinctio
-        reprehenderit? Quaerat nesciunt, culpa doloribus fugit eaque blanditiis
-        deleniti aliquam neque. Nostrum ad velit mollitia veniam eos optio esse
-        veritatis nemo praesentium qui sapiente sed, neque atque perspiciatis
-        ipsum animi nihil vero sequi! Vitae numquam blanditiis quasi fugit
-        nesciunt quam nam, in incidunt tenetur inventore qui esse eaque
-        voluptatem officia, est doloremque ipsa reiciendis enim illum minima
-        harum corrupti fuga animi? Quos ullam magnam accusantium dolor tenetur
-        dolore cum quod? Explicabo, quam voluptatibus minima officiis eveniet
-        autem non deserunt ipsa id?
+      <p className='mb-4'>
+        The link contains all informaiton to display the same color setting on
+        another device. Share using one of the options below.
       </p>
+      <div>
+        <button
+          className='py-2 px-4 border border-solid border-slate-800 rounded hover:bg-slate-800 hover:text-slate-200 transition-colors'
+          onClick={copyLink}
+        >
+          {hasCopied ? 'Link copied!' : 'Copy link'}
+        </button>
+      </div>
     </Modal>
   )
 }

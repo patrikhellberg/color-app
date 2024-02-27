@@ -15,7 +15,7 @@ const InfoModal = () => {
       <p className='mb-2'>
         Click the gear icon on the top right to get started.
       </p>
-      <p className='mb-2'>First select a mode:</p>
+      <p className='mb-1'>Select a mode</p>
       <ul className=' list-disc pl-4 mb-2'>
         <li>
           <strong>Color</strong> lets you pick a single color to set your screen
