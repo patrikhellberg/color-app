@@ -7,7 +7,8 @@ import { colorPresets, getForegroundColor } from '@/utils/colors'
 const ColorPresets = () => {
   const { dispatch } = useContext(AppContext)
 
-  const handleSelect = (data: string) => dispatch({ type: 'SET_COLOR', data })
+  const handleSelect = (data: string) =>
+    dispatch({ type: 'SET_PRIMARY_COLOR', data })
 
   return (
     <div className='mt-4 flex gap-2 flex-wrap'>

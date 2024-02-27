@@ -1,20 +1,31 @@
 'use client'
 
-import { useContext } from 'react'
+import { useContext, useMemo } from 'react'
 import { AppContext } from './AppContext'
 
 const ColorDisplay = () => {
   const {
-    state: { selectedColor },
+    state: { primaryColor, mode, secondaryColor, gradientDirection, fadeTime },
   } = useContext(AppContext)
-  return (
-    <div
-      className='h-screen'
-      style={{
-        background: selectedColor,
-      }}
-    />
-  )
+
+  const style = useMemo(() => {
+    if (mode === 'single') return { backgroundColor: primaryColor }
+    if (mode === 'gradient') {
+      return {
+        backgroundImage: `linear-gradient(${gradientDirection}deg, ${primaryColor}, ${secondaryColor})`,
+      }
+    }
+    if (mode === 'fade') {
+      return {
+        animationName: 'colorfade',
+        animationDuration: `${fadeTime}s`,
+        animationDirection: 'alternate',
+        animationIterationCount: 'infinite',
+      }
+    }
+  }, [primaryColor, mode, secondaryColor, gradientDirection, fadeTime])
+
+  return <div className='h-screen transition-colors' style={style} />
 }
 
 export default ColorDisplay

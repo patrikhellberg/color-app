@@ -1,4 +1,5 @@
 import { getForegroundColor } from '@/utils/colors'
+import { setCssVariable } from '@/utils/css'
 import { useRouter, useSearchParams } from 'next/navigation'
 import {
   Dispatch,
@@ -10,11 +11,17 @@ import {
   useState,
 } from 'react'
 
-type AppState = {
+export type Mode = 'single' | 'gradient' | 'fade'
+
+export type AppState = {
   toolbarOpen: boolean
   infoModalOpen: boolean
   shareModalOpen: boolean
-  selectedColor: string
+  primaryColor: string
+  secondaryColor: string
+  gradientDirection: number
+  mode: Mode
+  fadeTime: number
 }
 
 type Computed = {
@@ -22,11 +29,15 @@ type Computed = {
 }
 
 export type ReducerType =
-  | 'SET_COLOR'
+  | 'SET_PRIMARY_COLOR'
   | 'SET_TOOLBAR'
   | 'SET_INFO_MODAL'
   | 'SET_SHARE_MODAL'
+  | 'SET_MODE'
   | 'SET_FROM_QUERY'
+  | 'SET_SECONDARY_COLOR'
+  | 'SET_GRADIENT_DIRECTION'
+  | 'SET_FADE_TIME'
 
 type ReducerAction = {
   type: ReducerType
@@ -37,14 +48,24 @@ const initialState: AppState = {
   toolbarOpen: false,
   infoModalOpen: false,
   shareModalOpen: false,
-  selectedColor: '#333333',
+  primaryColor: '#333333',
+  secondaryColor: '#FFFFFF',
+  mode: 'single',
+  gradientDirection: 0,
+  fadeTime: 5,
 }
 
 const initialComputed: Computed = {
   foreground: '#FFFFFF',
 }
 
-const queryKeys: (keyof AppState)[] = ['selectedColor']
+const queryKeys: (keyof AppState)[] = [
+  'primaryColor',
+  'mode',
+  'secondaryColor',
+  'gradientDirection',
+  'fadeTime',
+]
 
 const reducer = (state: AppState, { type, data }: ReducerAction): AppState => {
   switch (type) {
@@ -63,15 +84,37 @@ const reducer = (state: AppState, { type, data }: ReducerAction): AppState => {
         ...state,
         shareModalOpen: data,
       }
-    case 'SET_COLOR':
+    case 'SET_PRIMARY_COLOR':
+      setCssVariable('--primary-color', data)
       return {
         ...state,
-        selectedColor: data,
+        primaryColor: data,
+      }
+    case 'SET_SECONDARY_COLOR':
+      setCssVariable('--secondary-color', data)
+      return {
+        ...state,
+        secondaryColor: data,
+      }
+    case 'SET_MODE':
+      return {
+        ...state,
+        mode: data,
       }
     case 'SET_FROM_QUERY':
+      const updated = { ...state, ...data }
+      setCssVariable('--primary-color', updated.primaryColor)
+      setCssVariable('--secondary-color', updated.secondaryColor)
+      return updated
+    case 'SET_GRADIENT_DIRECTION':
       return {
         ...state,
-        ...data,
+        gradientDirection: data,
+      }
+    case 'SET_FADE_TIME':
+      return {
+        ...state,
+        fadeTime: data,
       }
     default:
       return state
@@ -95,8 +138,8 @@ const Context = ({ children }: PropsWithChildren) => {
   const router = useRouter()
 
   const foreground = useMemo(() => {
-    return getForegroundColor(state.selectedColor)
-  }, [state.selectedColor])
+    return getForegroundColor(state.primaryColor)
+  }, [state.primaryColor])
 
   useEffect(() => {
     if (!isInitialized) {
