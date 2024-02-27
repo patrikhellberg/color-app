@@ -28,10 +28,10 @@ const ColorInput = ({ reducerType, label, colorKey }: Props) => {
   }
 
   return (
-    <div>
-      <div className='flex justify-between mb-2'>
+    <div className='w-full'>
+      <div className='flex gap-4 mb-2'>
         <p>{label}</p>
-        <button onClick={() => setPresetsOpen(!presetsOpen)} className='pr-1'>
+        <button onClick={() => setPresetsOpen(!presetsOpen)}>
           <SVG
             className='pointer-events-none'
             icon={Palette}
@@ -49,7 +49,7 @@ const ColorInput = ({ reducerType, label, colorKey }: Props) => {
       />
       <button
         onClick={openColorInput}
-        className='border border-solid h-[41px] rounded-md w-64 border-slate-400'
+        className='border border-solid h-[41px] rounded-md w-64 border-slate-400 w-full'
         style={{
           background: state[colorKey] as string,
         }}

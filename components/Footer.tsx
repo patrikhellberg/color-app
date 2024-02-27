@@ -5,7 +5,7 @@ const Footer = () => {
   const sourceCodeLink = 'https://github.com/patrikhellberg/color-app'
 
   return (
-    <div className='bg-gray-900 text-gray-400 flex items-center justify-around border-t border-solid border-slate-600 px-4 py-8'>
+    <div className='bg-gray-900 text-gray-400 md:flex-row flex-col gap-4 flex items-center justify-around border-t border-solid border-slate-600 px-4 py-8'>
       <p>© Patrik Hellberg {new Date().getFullYear()}</p>
       <a
         href={githubLink}

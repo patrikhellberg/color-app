@@ -31,9 +31,9 @@ const ShareModal = () => {
         The link contains all informaiton to display the same color setting on
         another device. Share using one of the options below.
       </p>
-      <div className='flex items-start gap-2'>
+      <div className='flex sm:flex-row items-center flex-col sm:items-start gap-2'>
         <button
-          className='py-2 px-4 border border-solid border-slate-800 rounded hover:bg-slate-800 hover:text-slate-200 transition-colors flex items-center gap-2 group'
+          className='py-2 px-4 border border-solid border-slate-800 rounded hover:bg-slate-800 hover:text-slate-200 transition-colors flex items-center gap-2 group sm:w-[unset] w-full justify-between'
           onClick={copyLink}
         >
           {hasCopied ? 'Link copied!' : 'Copy link'}

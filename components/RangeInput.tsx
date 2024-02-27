@@ -30,7 +30,7 @@ const RangeInput = ({
     <div>
       <p className='mb-2'>{label}</p>
       <input
-        className='w-40 accent-slate-400 h-5'
+        className='w-full accent-slate-400 h-5'
         type='range'
         value={state[stateKey] as number}
         onChange={handleChange}

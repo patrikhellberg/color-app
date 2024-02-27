@@ -28,7 +28,7 @@ const Toolbar = () => {
       <button className='absolute top-4 right-4' onClick={closeToolbar}>
         <SVG icon={X} pathClassName='stroke-slate-300' width={20} />
       </button>
-      <div className='flex gap-4'>
+      <div className='grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
         <ModeSelector />
         <ColorInput
           colorKey='primaryColor'

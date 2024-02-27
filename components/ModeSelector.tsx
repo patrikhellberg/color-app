@@ -17,9 +17,9 @@ const ModeSelector = () => {
   const setMode = (mode: Mode) => dispatch({ type: 'SET_MODE', data: mode })
 
   return (
-    <div className='flex flex-col items-start'>
+    <div className='flex flex-col w-full'>
       <p className='mb-2'>Select mode</p>
-      <div className='flex bg-slate-700 rounded-md border border-solid border-slate-400 p-1'>
+      <div className='flex bg-slate-700 rounded-md border border-solid border-slate-400 p-1 justify-between'>
         {(Object.keys(modes) as Mode[]).map((key) => (
           <button
             onClick={() => setMode(key)}
