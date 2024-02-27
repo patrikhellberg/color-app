@@ -5,7 +5,6 @@ import { AppContext } from './AppContext'
 import SVG, { X } from '@hellberg/react-svg-icons'
 import { useClickOutside } from '@/utils/hooks'
 import ColorInput from './ColorInput'
-import ColorPresets from './ColorPresets'
 import ModeSelector from './ModeSelector'
 import RangeInput from './RangeInput'
 
@@ -69,7 +68,6 @@ const Toolbar = () => {
             unit='seconds'
           />
         )}
-        {/* <ColorPresets /> */}
       </div>
     </div>
   )

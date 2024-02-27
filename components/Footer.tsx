@@ -2,7 +2,7 @@ import SVG, { GitBranch, GithubLogo } from '@hellberg/react-svg-icons'
 
 const Footer = () => {
   const githubLink = 'https://github.com/patrikhellberg'
-  const sourceCodeLink = 'https://github.com/patrikhellberg'
+  const sourceCodeLink = 'https://github.com/patrikhellberg/color-app'
 
   return (
     <div className='bg-gray-900 text-gray-400 flex items-center justify-around border-t border-solid border-slate-600 px-4 py-8'>
