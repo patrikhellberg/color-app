@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Color app | Use your screen as a mood light',
   description:
-    'A simple application that allows for setting the color of the screen.',
+    'A simple application that allows for setting the color of your screen.',
 }
 
 export default function RootLayout({
