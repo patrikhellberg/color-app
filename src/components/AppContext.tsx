@@ -1,14 +1,13 @@
 import { getForegroundColor } from '@/utils/colors'
 import { setCssVariable } from '@/utils/css'
-import { useRouter, useSearchParams } from 'next/navigation'
+import { readQueryState, toQuery } from '@/utils/query'
 import {
-  Dispatch,
-  PropsWithChildren,
+  type Dispatch,
+  type PropsWithChildren,
   createContext,
   useEffect,
   useMemo,
   useReducer,
-  useState,
 } from 'react'
 
 import type { AppState, Computed, ReducerAction } from '@/types'
@@ -28,13 +27,14 @@ const initialComputed: Computed = {
   foreground: '#FFFFFF',
 }
 
-const queryKeys: (keyof AppState)[] = [
-  'primaryColor',
-  'mode',
-  'secondaryColor',
-  'gradientDirection',
-  'fadeTime',
-]
+// Opens the toolbar on a first visit; a shared link shows its colors as-is.
+const getInitialState = (): AppState => {
+  const queryState = readQueryState(window.location.search)
+  if (!Object.keys(queryState).length) {
+    return { ...initialState, toolbarOpen: true }
+  }
+  return { ...initialState, ...queryState }
+}
 
 const reducer = (state: AppState, { type, data }: ReducerAction): AppState => {
   switch (type) {
@@ -54,13 +54,11 @@ const reducer = (state: AppState, { type, data }: ReducerAction): AppState => {
         shareModalOpen: data,
       }
     case 'SET_PRIMARY_COLOR':
-      setCssVariable('--primary-color', data)
       return {
         ...state,
         primaryColor: data,
       }
     case 'SET_SECONDARY_COLOR':
-      setCssVariable('--secondary-color', data)
       return {
         ...state,
         secondaryColor: data,
@@ -70,11 +68,6 @@ const reducer = (state: AppState, { type, data }: ReducerAction): AppState => {
         ...state,
         mode: data,
       }
-    case 'SET_FROM_QUERY':
-      const updated = { ...state, ...data }
-      setCssVariable('--primary-color', updated.primaryColor)
-      setCssVariable('--secondary-color', updated.secondaryColor)
-      return updated
     case 'SET_GRADIENT_DIRECTION':
       return {
         ...state,
@@ -100,35 +93,23 @@ export const AppContext = createContext<{
   computed: initialComputed,
 })
 
-const Context = ({ children }: PropsWithChildren) => {
-  const [isInitialized, setIsInitialized] = useState(false)
-  const [state, dispatch] = useReducer(reducer, initialState)
-  const searchParams = useSearchParams()
-  const router = useRouter()
+const AppContextProvider = ({ children }: PropsWithChildren) => {
+  const [state, dispatch] = useReducer(reducer, undefined, getInitialState)
 
   const foreground = useMemo(() => {
     return getForegroundColor(state.primaryColor)
   }, [state.primaryColor])
 
+  // The fade animation reads the colors from CSS variables.
   useEffect(() => {
-    if (!isInitialized) {
-      const queryState: { [key: string]: string } = {}
-      searchParams.forEach((value, key) => {
-        queryState[key] = value
-      })
-      if (Object.keys(queryState).length) {
-        dispatch({ type: 'SET_FROM_QUERY', data: queryState })
-      } else dispatch({ type: 'SET_TOOLBAR', data: true })
-      setIsInitialized(true)
-    } else {
-      const query = queryKeys.reduce((acc, key, i) => {
-        acc += `${key}=${encodeURIComponent(state[key] as string)}`
-        if (i !== queryKeys.length - 1) acc += '&'
-        return acc
-      }, '?')
-      router.push(`${query}`)
-    }
-  }, [state, isInitialized, searchParams, router])
+    setCssVariable('--primary-color', state.primaryColor)
+    setCssVariable('--secondary-color', state.secondaryColor)
+  }, [state.primaryColor, state.secondaryColor])
+
+  const query = toQuery(state)
+  useEffect(() => {
+    window.history.replaceState(window.history.state, '', query)
+  }, [query])
 
   return (
     <AppContext.Provider value={{ state, computed: { foreground }, dispatch }}>
@@ -137,4 +118,4 @@ const Context = ({ children }: PropsWithChildren) => {
   )
 }
 
-export default Context
+export default AppContextProvider

@@ -1,10 +1,8 @@
-'use client'
-
-import { PropsWithChildren, useContext, useMemo, useRef } from 'react'
+import { type PropsWithChildren, useContext, useMemo, useRef } from 'react'
 import { AppContext } from './AppContext'
 import type { ReducerType, ModalKey } from '@/types'
 import OverlayContainer from './OverlayContainer'
-import SVG, { X } from '@hellberg/react-svg-icons'
+import { X } from 'lucide-react'
 import { useClickOutside } from '@/utils/hooks'
 
 type Props = {
@@ -31,7 +29,7 @@ const Modal = ({
         ref={ref}
       >
         <button className='absolute top-4 right-4' onClick={close}>
-          <SVG icon={X} width={20} />
+          <X size={20} strokeWidth={1.5} />
         </button>
         {children}
       </div>

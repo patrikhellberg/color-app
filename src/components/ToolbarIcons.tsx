@@ -1,12 +1,4 @@
-'use client'
-
-import SVG, {
-  ArrowsIn,
-  ArrowsOut,
-  Export,
-  GearSix,
-  Info,
-} from '@hellberg/react-svg-icons'
+import { Info, Maximize, Minimize, Settings, Share } from 'lucide-react'
 import { useContext, useState } from 'react'
 import { AppContext } from './AppContext'
 
@@ -22,19 +14,19 @@ const ToolbarIcons = () => {
     {
       action: () => dispatch({ type: 'SET_SHARE_MODAL', data: true }),
       id: 'open_shareModalOpen',
-      icon: Export,
+      Icon: Share,
       title: 'Share',
     },
     {
       action: () => dispatch({ type: 'SET_INFO_MODAL', data: true }),
       id: 'open_infoModalOpen',
-      icon: Info,
+      Icon: Info,
       title: 'Information',
     },
     {
       action: () => dispatch({ type: 'SET_TOOLBAR', data: true }),
       id: 'open_toolbar',
-      icon: GearSix,
+      Icon: Settings,
       title: 'Settings',
     },
   ]
@@ -49,31 +41,28 @@ const ToolbarIcons = () => {
     }
   }
 
+  const FullScreenIcon = isFullScreen ? Minimize : Maximize
+
   return (
     <div className='absolute top-4 right-4 flex gap-4'>
       <button
         onClick={makeFullScreen}
         title={isFullScreen ? 'Exit full screen' : 'Full screen'}
       >
-        <SVG
-          stroke={foreground}
-          icon={isFullScreen ? ArrowsIn : ArrowsOut}
-          className='cursor-pointer'
-          pathClassName='pointer-events-none'
+        <FullScreenIcon
+          size={32}
+          strokeWidth={1.5}
+          color={foreground}
+          className='pointer-events-none'
         />
       </button>
-      {icons.map((icon) => (
-        <button
-          onClick={icon.action}
-          id={icon.id}
-          key={icon.id}
-          title={icon.title}
-        >
-          <SVG
-            stroke={foreground}
-            icon={icon.icon}
-            className='cursor-pointer'
-            pathClassName='pointer-events-none'
+      {icons.map(({ action, id, Icon, title }) => (
+        <button onClick={action} id={id} key={id} title={title}>
+          <Icon
+            size={32}
+            strokeWidth={1.5}
+            color={foreground}
+            className='pointer-events-none'
           />
         </button>
       ))}

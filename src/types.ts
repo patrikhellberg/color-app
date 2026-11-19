@@ -25,7 +25,6 @@ export type ReducerType =
   | 'SET_INFO_MODAL'
   | 'SET_SHARE_MODAL'
   | 'SET_MODE'
-  | 'SET_FROM_QUERY'
   | 'SET_SECONDARY_COLOR'
   | 'SET_GRADIENT_DIRECTION'
   | 'SET_FADE_TIME'

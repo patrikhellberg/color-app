@@ -1,4 +1,5 @@
-import SVG, { GitBranch, GithubLogo } from '@hellberg/react-svg-icons'
+import { GitBranch } from 'lucide-react'
+import GithubIcon from './GithubIcon'
 
 const Footer = () => {
   const githubLink = 'https://github.com/patrikhellberg'
@@ -13,7 +14,7 @@ const Footer = () => {
         rel='noreferrer'
         className='flex items-center gap-2 underline'
       >
-        <SVG icon={GithubLogo} width={16} pathClassName='stroke-gray-400' />
+        <GithubIcon size={16} />
         <p>@patrikhellberg</p>
       </a>
       <a
@@ -22,7 +23,7 @@ const Footer = () => {
         rel='noreferrer'
         className='flex items-center gap-2 underline'
       >
-        <SVG icon={GitBranch} width={16} pathClassName='stroke-gray-400' />
+        <GitBranch size={16} strokeWidth={1.5} />
         <p>Source</p>
       </a>
     </div>

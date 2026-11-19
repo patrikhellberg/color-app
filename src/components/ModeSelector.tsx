@@ -24,7 +24,7 @@ const ModeSelector = () => {
           <button
             onClick={() => setMode(key)}
             key={`mode_${key}`}
-            className={`px-4 py-1 rounded transition-colors text-slate-300 ${
+            className={`px-4 py-1 rounded-sm transition-colors text-slate-300 ${
               key === mode ? 'bg-slate-900' : ''
             }`}
           >

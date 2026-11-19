@@ -1,9 +1,7 @@
-'use client'
-
-import { ChangeEventHandler, useContext, useRef, useState } from 'react'
+import { type ChangeEventHandler, useContext, useRef, useState } from 'react'
 import { AppContext } from './AppContext'
 import type { AppState, ReducerType } from '@/types'
-import SVG, { Palette } from '@hellberg/react-svg-icons'
+import { Palette } from 'lucide-react'
 import ColorPresets from './ColorPresets'
 
 type Props = {
@@ -32,11 +30,10 @@ const ColorInput = ({ reducerType, label, colorKey }: Props) => {
       <div className='flex gap-4 mb-2'>
         <p>{label}</p>
         <button onClick={() => setPresetsOpen(!presetsOpen)}>
-          <SVG
-            className='pointer-events-none'
-            icon={Palette}
-            pathClassName='stroke-slate-300'
-            width={20}
+          <Palette
+            size={20}
+            strokeWidth={1.5}
+            className='pointer-events-none text-slate-300'
           />
         </button>
       </div>
