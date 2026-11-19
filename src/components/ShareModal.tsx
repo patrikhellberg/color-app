@@ -1,7 +1,6 @@
 import { useContext, useEffect, useRef, useState } from 'react'
 import Modal from './Modal'
-import { Checks, CopySimple } from '@hellberg/react-svg-icons'
-import SVG from './Icon'
+import { CheckCheck, Copy } from 'lucide-react'
 import { toCanvas } from 'qrcode'
 import { AppContext } from './AppContext'
 import { getShareUrl } from '@/utils/query'
@@ -34,16 +33,19 @@ const ShareModal = () => {
       </p>
       <div className='flex sm:flex-row items-center flex-col sm:items-start gap-2'>
         <button
-          className='py-2 px-4 border border-solid border-slate-800 rounded-sm hover:bg-slate-800 hover:text-slate-200 transition-colors flex items-center gap-2 group sm:w-[unset] w-full justify-between'
+          className='py-2 px-4 border border-solid border-slate-800 rounded-sm hover:bg-slate-800 hover:text-slate-200 transition-colors flex items-center gap-2 sm:w-[unset] w-full justify-between'
           onClick={copyLink}
         >
           {hasCopied ? 'Link copied!' : 'Copy link'}
-          <SVG
-            icon={hasCopied ? Checks : CopySimple}
-            width={20}
-            className='pointer-events-none'
-            pathClassName='group-hover:stroke-slate-200 stroke-black'
-          />
+          {hasCopied ? (
+            <CheckCheck
+              size={20}
+              strokeWidth={1.5}
+              className='pointer-events-none'
+            />
+          ) : (
+            <Copy size={20} strokeWidth={1.5} className='pointer-events-none' />
+          )}
         </button>
         <canvas
           ref={canvasRef}

@@ -1,7 +1,6 @@
 import { useContext, useRef } from 'react'
 import { AppContext } from './AppContext'
-import { X } from '@hellberg/react-svg-icons'
-import SVG from './Icon'
+import { X } from 'lucide-react'
 import { useClickOutside } from '@/utils/hooks'
 import ColorInput from './ColorInput'
 import ModeSelector from './ModeSelector'
@@ -25,7 +24,7 @@ const Toolbar = () => {
     `}
     >
       <button className='absolute top-4 right-4' onClick={closeToolbar}>
-        <SVG icon={X} pathClassName='stroke-slate-300' width={20} />
+        <X size={20} strokeWidth={1.5} className='text-slate-300' />
       </button>
       <div className='grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
         <ModeSelector />
