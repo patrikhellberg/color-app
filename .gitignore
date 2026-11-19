@@ -1,8 +1,5 @@
 /node_modules
-/.next/
-/out/
-/build
+/dist
 .DS_Store
 .env*
-next-env.d.ts
 todo

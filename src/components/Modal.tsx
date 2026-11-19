@@ -1,10 +1,9 @@
-'use client'
-
-import { PropsWithChildren, useContext, useMemo, useRef } from 'react'
+import { type PropsWithChildren, useContext, useMemo, useRef } from 'react'
 import { AppContext } from './AppContext'
 import type { ReducerType, ModalKey } from '@/types'
 import OverlayContainer from './OverlayContainer'
-import SVG, { X } from '@hellberg/react-svg-icons'
+import { X } from '@hellberg/react-svg-icons'
+import SVG from './Icon'
 import { useClickOutside } from '@/utils/hooks'
 
 type Props = {

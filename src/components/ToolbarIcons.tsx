@@ -1,12 +1,11 @@
-'use client'
-
-import SVG, {
+import {
   ArrowsIn,
   ArrowsOut,
   Export,
   GearSix,
   Info,
 } from '@hellberg/react-svg-icons'
+import SVG from './Icon'
 import { useContext, useState } from 'react'
 import { AppContext } from './AppContext'
 

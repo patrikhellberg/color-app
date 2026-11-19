@@ -1,9 +1,8 @@
-'use client'
-
-import { ChangeEventHandler, useContext, useRef, useState } from 'react'
+import { type ChangeEventHandler, useContext, useRef, useState } from 'react'
 import { AppContext } from './AppContext'
 import type { AppState, ReducerType } from '@/types'
-import SVG, { Palette } from '@hellberg/react-svg-icons'
+import { Palette } from '@hellberg/react-svg-icons'
+import SVG from './Icon'
 import ColorPresets from './ColorPresets'
 
 type Props = {

@@ -1,8 +1,7 @@
-'use client'
-
 import { useContext, useRef } from 'react'
 import { AppContext } from './AppContext'
-import SVG, { X } from '@hellberg/react-svg-icons'
+import { X } from '@hellberg/react-svg-icons'
+import SVG from './Icon'
 import { useClickOutside } from '@/utils/hooks'
 import ColorInput from './ColorInput'
 import ModeSelector from './ModeSelector'

@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useContext } from 'react'
+import { type ChangeEventHandler, useContext } from 'react'
 import { AppContext } from './AppContext'
 import type { ReducerType, AppState } from '@/types'
 

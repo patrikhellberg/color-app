@@ -14,14 +14,14 @@ const ColorPresets = ({ stateKey, reducerType }: Props) => {
     dispatch({ type: reducerType, data: value })
 
   return (
-    <div className=' relative after:absolute after:bottom-0 after:left-0 after:right-0 after:bg-gradient-to-t after:to-transparent after:from-slate-900 after:content-[""] after:h-8'>
+    <div className=' relative after:absolute after:bottom-0 after:left-0 after:right-0 after:bg-linear-to-t after:to-transparent after:from-slate-900 after:content-[""] after:h-8'>
       <p>Color presets</p>
       <div className='grid grid-cols-2 gap-2 w-64 max-h-64 overflow-scroll pb-8'>
         {Object.keys(colorPresets).map((key) => (
           <button
             key={`preset_${stateKey}_${key}`}
             onClick={() => onSelect(colorPresets[key])}
-            className='rounded border border-solid'
+            className='rounded-sm border border-solid'
             style={{
               background: colorPresets[key],
               borderColor: getForegroundColor(colorPresets[key]),

@@ -1,0 +1,4 @@
+overrides:
+  # The icon package lists react 18 as a dependency instead of a peer; elements
+  # created by a second React copy can't be rendered by the app's React 19.
+  '@hellberg/react-svg-icons>react': $react

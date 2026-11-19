@@ -1,26 +1,27 @@
-'use client'
-
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import Modal from './Modal'
-import SVG, { Checks, CopySimple } from '@hellberg/react-svg-icons'
+import { Checks, CopySimple } from '@hellberg/react-svg-icons'
+import SVG from './Icon'
 import { toCanvas } from 'qrcode'
-import { useSearchParams } from 'next/navigation'
+import { AppContext } from './AppContext'
+import { getShareUrl } from '@/utils/query'
 
 const ShareModal = () => {
+  const { state } = useContext(AppContext)
   const [hasCopied, setHasCopied] = useState(false)
-  const searchParams = useSearchParams()
+  const canvasRef = useRef<HTMLCanvasElement | null>(null)
+  const shareUrl = getShareUrl(state)
 
   const copyLink = () => {
-    navigator.clipboard.writeText(location.href)
+    navigator.clipboard.writeText(shareUrl)
     setHasCopied(true)
     setTimeout(() => setHasCopied(false), 1000)
   }
 
   useEffect(() => {
-    const canvas = document.getElementById('qrcode') as HTMLCanvasElement | null
-    if (!canvas) return
-    toCanvas(canvas, location.href)
-  }, [searchParams])
+    if (!canvasRef.current) return
+    toCanvas(canvasRef.current, shareUrl)
+  }, [shareUrl])
 
   return (
     <Modal modalKey='shareModalOpen' closeActionType='SET_SHARE_MODAL'>
@@ -33,7 +34,7 @@ const ShareModal = () => {
       </p>
       <div className='flex sm:flex-row items-center flex-col sm:items-start gap-2'>
         <button
-          className='py-2 px-4 border border-solid border-slate-800 rounded hover:bg-slate-800 hover:text-slate-200 transition-colors flex items-center gap-2 group sm:w-[unset] w-full justify-between'
+          className='py-2 px-4 border border-solid border-slate-800 rounded-sm hover:bg-slate-800 hover:text-slate-200 transition-colors flex items-center gap-2 group sm:w-[unset] w-full justify-between'
           onClick={copyLink}
         >
           {hasCopied ? 'Link copied!' : 'Copy link'}
@@ -45,8 +46,8 @@ const ShareModal = () => {
           />
         </button>
         <canvas
-          id='qrcode'
-          className='border border-solid border-slate-800 rounded'
+          ref={canvasRef}
+          className='border border-solid border-slate-800 rounded-sm'
         />
       </div>
     </Modal>
